@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magic Engagement | Domine o Jogo do Engajamento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --brand-red: #d60000;
+        --brand-red-dark: #8b0000;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #000000;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+      .font-logo-script {
+        font-family: 'Satisfy', cursive;
+      }
+      .gradient-text {
+        background: linear-gradient(to bottom, #ffffff, #fca5a5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .logo-red-gradient {
+        background: radial-gradient(circle at center, #ff0000 0%, #8b0000 100%);
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(214, 0, 0, 0.2);
+      }
+      .red-shadow {
+        box-shadow: 0 0 30px rgba(214, 0, 0, 0.3);
+      }
+      .btn-primary {
+        background-color: var(--brand-red);
+        transition: all 0.3s ease;
+      }
+      .btn-primary:hover {
+        background-color: #ff0000;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(214, 0, 0, 0.4);
+      }
+      
+      /* Animation Classes */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform, opacity;
+      }
+      
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-left {
+        opacity: 0;
+        transform: translateX(-40px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal-left.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .reveal-right {
+        opacity: 0;
+        transform: translateX(40px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal-right.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Staggered delays for children */
+      .reveal-delay-1 { transition-delay: 100ms; }
+      .reveal-delay-2 { transition-delay: 200ms; }
+      .reveal-delay-3 { transition-delay: 300ms; }
+      .reveal-delay-4 { transition-delay: 400ms; }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--brand-red);
+        border-radius: 4px;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

@@ -1,0 +1,283 @@
+
+import React, { useState, useEffect } from 'react';
+import { 
+  ChevronRight, 
+  Menu, 
+  X, 
+  Play, 
+  CheckCircle2, 
+  ArrowRight,
+  Zap,
+  Star,
+  Lock,
+  Instagram,
+  Code,
+  ShieldAlert,
+  Skull
+} from 'lucide-react';
+import { FEATURES, TESTIMONIALS, FAQS } from './constants';
+import SectionHeading from './components/SectionHeading';
+import Calculator from './components/Calculator';
+
+const Logo = ({ size = "normal" }: { size?: "small" | "normal" | "large" }) => {
+  const scale = size === "small" ? "scale-50" : size === "large" ? "scale-125" : "scale-100";
+  return (
+    <div className={`flex flex-col items-center leading-none ${scale}`}>
+      <span className="text-white font-black tracking-tighter text-2xl md:text-3xl">MAGIC</span>
+      <span className="font-logo-script text-white text-3xl md:text-4xl -mt-2">Engagement</span>
+      <div className="mt-2 w-6 h-6 border-2 border-white rounded-md flex items-center justify-center">
+        <div className="w-1 h-1 bg-white rounded-full absolute top-1 right-1"></div>
+        <div className="w-3 h-3 border-2 border-white rounded-full"></div>
+      </div>
+    </div>
+  );
+};
+
+const App: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    revealElements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
+  return (
+    <div className="min-h-screen selection:bg-[#d60000] selection:text-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <div className="flex items-center scale-75 md:scale-90 origin-left">
+            <Logo size="small" />
+          </div>
+
+          <div className="hidden md:flex items-center gap-10">
+            <button onClick={() => scrollToSection('problema')} className="text-xs font-black uppercase tracking-widest hover:text-[#d60000] transition-colors">O Negócio</button>
+            <button onClick={() => scrollToSection('metodo')} className="text-xs font-black uppercase tracking-widest hover:text-[#d60000] transition-colors">A Máquina</button>
+            <button 
+              onClick={() => scrollToSection('cta')} 
+              className="px-8 py-3 bg-[#d60000] text-white font-black rounded-full hover:scale-105 transition-all text-xs tracking-widest"
+            >
+              FATURAR AGORA
+            </button>
+          </div>
+
+          <button className="md:hidden text-[#d60000]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative pt-40 pb-24 md:pt-60 md:pb-40 overflow-hidden logo-red-gradient">
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <div className="mb-12 inline-block p-6 rounded-3xl bg-black/20 backdrop-blur-md border border-white/10 shadow-2xl reveal">
+            <Logo size="large" />
+          </div>
+          
+          <h1 className="text-5xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter max-w-6xl mx-auto italic uppercase reveal reveal-delay-1">
+            ELES QUEREM <span className="text-black">RECONHECIMENTO</span>. <br/>
+            VOCÊ QUER <span className="text-white underline decoration-[#d60000]">LUCRO</span>.
+          </h1>
+          
+          <p className="text-xl md:text-3xl text-white/90 max-w-4xl mx-auto mb-16 font-medium leading-tight reveal reveal-delay-2">
+            A internet é um teatro de egos. Aprenda a ser o dono da bilheteria e <span className="font-black text-black uppercase">Lucre brutalmente com a vaidade dos outros.</span>
+          </p>
+
+          <div className="flex flex-col md:flex-row gap-6 justify-center items-center reveal reveal-delay-3">
+            <button 
+              onClick={() => scrollToSection('cta')}
+              className="px-14 py-7 bg-white text-[#d60000] font-black text-2xl rounded-2xl flex items-center justify-center gap-4 hover:bg-gray-100 transition-all transform hover:-translate-y-2 shadow-2xl"
+            >
+              ATIVAR MINHA FÁBRICA DE STATUS <ArrowRight size={32} />
+            </button>
+          </div>
+
+          <div className="mt-24 flex flex-col items-center reveal reveal-delay-4">
+            <p className="text-sm font-black tracking-[0.3em] uppercase text-white/60 mb-6 italic">O mercado de aparências nunca para</p>
+            <div className="flex flex-wrap justify-center gap-12 grayscale opacity-50 contrast-125">
+               <Instagram size={32} />
+               <Zap size={32} />
+               <Code size={32} />
+               <Skull size={32} />
+            </div>
+          </div>
+        </div>
+        
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+          <svg className="relative block w-full h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C49.1,35.19,158.06,77.91,273.1,80.12,289.47,80.44,305.65,79.33,321.39,56.44Z" fill="#000000"></path>
+          </svg>
+        </div>
+      </section>
+
+      {/* Script Highlight */}
+      <section id="metodo" className="py-24 bg-black overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="glass-card p-10 md:p-20 rounded-[4rem] flex flex-col md:flex-row items-center gap-16 border-[#d60000]/30 reveal">
+            <div className="md:w-1/2 reveal-left">
+              <div className="inline-flex items-center gap-2 text-[#d60000] mb-6 font-black uppercase tracking-widest text-sm">
+                <Skull size={20} /> O Sistema que Alimenta o Ego
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black mb-8 leading-none italic">
+                A MÁQUINA QUE <span className="text-[#d60000]">IMPRIME</span> DINHEIRO DO NADA.
+              </h2>
+              <p className="text-xl text-gray-400 mb-10 leading-relaxed">
+                As pessoas vendariam a alma para parecerem bem-sucedidas. Nós te entregamos o sistema que entrega essa "fama" em segundos. O site está pronto, os fornecedores estão na mão, o lucro é inevitável.
+              </p>
+              <ul className="space-y-4 mb-10">
+                {["Script que automatiza a vaidade", "Margens absurdas de até 1000%", "Sem precisar aparecer ou criar conteúdo", "O mercado mais viciado do mundo"].map((t, i) => (
+                  <li key={i} className={`flex items-center gap-3 text-lg font-bold reveal reveal-delay-${i+1}`}>
+                    <CheckCircle2 className="text-[#d60000]" /> {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="md:w-1/2 relative reveal-right">
+               <div className="absolute -inset-4 bg-[#d60000]/20 rounded-3xl blur-3xl"></div>
+               <img 
+                src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=800" 
+                className="relative rounded-3xl border border-[#d60000]/20 grayscale hover:grayscale-0 transition-all duration-500 shadow-2xl"
+                alt="Dinheiro e Status"
+               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-24 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="reveal">
+            <SectionHeading 
+              title="A PSICOLOGIA DO LUCRO" 
+              subtitle="O ser humano precisa ser notado. Você só precisa fornecer o que eles desejam desesperadamente."
+            />
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 mt-16">
+            {FEATURES.map((feature, idx) => (
+              <div key={idx} className={`p-10 rounded-3xl bg-zinc-950 border border-white/5 hover:border-[#d60000]/50 transition-all group hover:-translate-y-2 reveal reveal-delay-${(idx % 3) + 1}`}>
+                <div className="w-16 h-16 bg-[#d60000]/10 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                  {/* Fixed TypeScript error by casting icon to ReactElement with any props */}
+                  {React.cloneElement(feature.icon as React.ReactElement<any>, { className: "w-8 h-8 text-[#d60000]" })}
+                </div>
+                <h3 className="text-2xl font-black mb-4 uppercase tracking-tighter italic">{feature.title}</h3>
+                <p className="text-gray-500 leading-relaxed">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Calculator */}
+      <section className="py-24 bg-zinc-950 border-y border-white/5 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="reveal">
+            <SectionHeading title="CALCULADORA DE VAIDADE" subtitle="Quanto você vai ganhar vendendo a percepção de sucesso?" />
+          </div>
+          <div className="reveal reveal-delay-2">
+            <Calculator />
+          </div>
+        </div>
+      </section>
+
+      {/* Brutal Copy Section */}
+      <section id="problema" className="py-24 overflow-hidden">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+           <div className="reveal">
+              <ShieldAlert className="mx-auto text-[#d60000] mb-8" size={64} />
+           </div>
+           <h2 className="text-5xl md:text-7xl font-black mb-10 tracking-tighter uppercase italic reveal reveal-delay-1">
+             O Mundo é de Quem <span className="text-[#d60000]">Parece</span> ser Grande.
+           </h2>
+           <p className="text-2xl text-gray-400 leading-relaxed mb-12 reveal reveal-delay-2">
+            Ninguém quer ser o primeiro a seguir. Ninguém quer curtir um post com 2 likes. <br/><br/>
+            As pessoas são gado digital. Elas seguem quem já é seguido. Elas admiram quem já é admirado. <br/><br/>
+            Ao vender seguidores e curtidas, você não está vendendo números, você está vendendo <span className="text-white font-bold">STATUS, PODER E RELEVÂNCIA.</span> <br/><br/>
+            <span className="text-white font-black italic">ELES PAGAM QUALQUER PREÇO PARA NÃO SEREM TRATADOS COMO NINGUÉM.</span>
+           </p>
+        </div>
+      </section>
+
+      {/* Pricing / Final CTA */}
+      <section id="cta" className="py-24 logo-red-gradient relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container relative z-10 mx-auto px-4 max-w-5xl">
+          <div className="bg-black/40 backdrop-blur-2xl p-12 md:p-24 rounded-[4rem] border border-white/10 text-center shadow-2xl reveal">
+            <Logo size="large" />
+            <h2 className="text-5xl md:text-8xl font-black my-12 tracking-tighter uppercase italic leading-none reveal reveal-delay-1">
+              DOMINE O MERCADO <br/>POR APENAS <span className="text-[#ff0000]">R$ 47</span>
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-10 text-left mb-16">
+              <div className="space-y-6 reveal-left reveal-delay-2">
+                {[
+                  "Seu Painel de Vendas Prontinho",
+                  "Fornecedores que Cobram Centavos",
+                  "O Segredo da Recorrência Infinita",
+                  "A Arte de Manipular Percepções",
+                  "Acesso para Sempre à Mina de Ouro"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 group">
+                    <div className="p-1 bg-[#d60000] rounded-full">
+                      <CheckCircle2 size={18} className="text-white" />
+                    </div>
+                    <span className="text-xl font-black uppercase italic tracking-tight group-hover:text-[#d60000] transition-colors">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-white/5 p-10 rounded-3xl border border-white/10 flex flex-col items-center justify-center reveal-right reveal-delay-2">
+                <span className="text-gray-400 line-through text-2xl">R$ 297,00</span>
+                <span className="text-7xl md:text-9xl font-black text-white leading-none">47</span>
+                <span className="text-xl font-bold uppercase tracking-widest mt-2">Um Almoço para Mudar sua Vida</span>
+              </div>
+            </div>
+
+            <button className="w-full py-8 bg-[#d60000] text-white font-black text-3xl rounded-3xl hover:bg-red-600 transition-all transform hover:scale-[1.02] shadow-[0_20px_50px_rgba(214,0,0,0.4)] flex items-center justify-center gap-4 reveal reveal-delay-3">
+              <Lock size={32} /> QUERO LUCRAR COM A VAIDADE AGORA
+            </button>
+            <p className="mt-8 text-white/50 font-bold uppercase tracking-[0.2em] text-xs reveal reveal-delay-4 italic">O risco é todo meu. Se não gostar, eu devolvo seus centavos.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-20 bg-black border-t border-white/5">
+        <div className="container mx-auto px-4 text-center">
+          <div className="mb-12 scale-75 inline-block reveal">
+            <Logo size="small" />
+          </div>
+          <p className="text-gray-600 text-sm max-w-3xl mx-auto italic reveal reveal-delay-1 uppercase tracking-tighter">
+            © 2024 MAGIC ENGAGEMENT. EXPLORANDO O MERCADO DE PERCEPÇÕES DIGITAIS. <br/>
+            Este site ensina estratégias de marketing agressivo. Aplique por sua conta e risco.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
